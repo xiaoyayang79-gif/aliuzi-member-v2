@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>阿六仔重慶小麵｜會員中心</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;
+  background:#f5f5f5;
+  color:#222;
+}
+.header{
+  background:linear-gradient(135deg,#260708,#7d090d);
+  color:white;
+  padding:28px 22px 35px;
+  border-radius:0 0 34px 34px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.logo{
+  width:58px;
+  height:58px;
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:20px;
+}
+.brand h1{
+  margin:0;
+  font-size:23px;
+}
+.brand p{
+  margin:5px 0 0;
+  opacity:.8;
+  font-size:14px;
+}
+.balance{
+  margin-top:25px;
+  padding:22px;
+  border-radius:24px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+}
+.balance small{
+  font-size:14px;
+}
+.money{
+  font-size:42px;
+  font-weight:800;
+  margin:4px 0;
+}
+.balance span{
+  font-size:13px;
+  opacity:.8;
+}
+.container{
+  padding:22px 18px 100px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.card{
+  background:white;
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 4px 16px rgba(0,0,0,.05);
+}
+.icon{
+  font-size:28px;
+}
+.card h2{
+  margin:8px 0 5px;
+  font-size:19px;
+}
+.card p{
+  color:#777;
+  font-size:14px;
+  margin:0 0 18px;
+}
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px 10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.red{background:#c91820;color:white}
+.yellow{background:#ffb900;color:#111}
+.black{background:#171717;color:white}
+.section{
+  margin-top:24px;
+}
+.section-title{
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+.record{
+  background:white;
+  padding:17px;
+  border-radius:18px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+}
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:76px;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -3px 15px rgba(0,0,0,.08);
+}
+.bottom div{
+  text-align:center;
+  font-size:12px;
+  color:#777;
+}
+.bottom b{
+  display:block;
+  font-size:25px;
+}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:10;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:420px;
+  border-radius:25px;
+  padding:25px;
+  text-align:center;
+}
+.modal-box h2{
+  margin-top:0;
+}
+.prize{
+  font-size:42px;
+  font-weight:900;
+  color:#c91820;
+  margin:20px 0;
+}
+.close{
+  background:#eee;
+  color:#333;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="brand">
+    <div class="logo">阿六</div>
+    <div>
+      <h1>阿六仔重慶小麵</h1>
+      <p>會員中心・消費回饋</p>
+    </div>
+  </div>
+
+  <div class="balance">
+    <small>我的阿六仔消費金</small>
+    <div class="money" id="balance">$0</div>
+    <span>僅限本店消費，不可提領</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">🎰</div>
+      <h2>消費抽獎</h2>
+      <p id="drawText">尚無抽獎次數</p>
+      <button class="red" onclick="draw()">開始抽獎</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">⭐</div>
+      <h2>集點</h2>
+      <p><b id="points">0</b> / 10 點</p>
+      <button class="yellow" onclick="redeem()">兌換規則</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎁</div>
+      <h2>優惠券</h2>
+      <p>新會員、生日、活動券</p>
+      <button class="black" onclick="coupon()">查看優惠</button>
+    </div>
+
+    <div class="card">
+      <div class="icon">👤</div>
+      <h2>會員</h2>
+      <p>LINE會員（登入中）</p>
+      <button class="black" onclick="member()">會員資料</button>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="section-title">📒 交易紀錄</div>
+
+    <div id="records">
+      <div class="record">
+        <span>目前尚無交易</span>
+        <span>$0</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom">
+  <div onclick="member()"><b>⌂</b>會員</div>
+  <div onclick="draw()"><b>🎰</b>抽獎</div>
+  <div onclick="coupon()"><b>🎁</b>優惠</div>
+  <div onclick="member()"><b>👤</b>我的</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2 id="modalTitle">恭喜！</h2>
+    <div class="prize" id="modalContent"></div>
+    <button class="red" onclick="closeModal()">確定</button>
+  </div>
+</div>
+
+<script>
+
+let balance=Number(localStorage.getItem("balance")||0);
+let points=Number(localStorage.getItem("points")||0);
+let draws=Number(localStorage.getItem("draws")||0);
+
+function update(){
+  document.getElementById("balance").innerText="$"+balance;
+  document.getElementById("points").innerText=points;
+  document.getElementById("drawText").innerText=
+    draws>0 ? "剩餘 "+draws+" 次抽獎" : "尚無抽獎次數";
+
+  localStorage.setItem("balance",balance);
+  localStorage.setItem("points",points);
+  localStorage.setItem("draws",draws);
+}
+
+function show(title,content){
+  document.getElementById("modalTitle").innerText=title;
+  document.getElementById("modalContent").innerText=content;
+  document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+function draw(){
+
+  if(draws<=0){
+    show("目前沒有抽獎次數","消費後即可獲得抽獎機會！");
+    return;
+  }
+
+  draws--;
+
+  const prizes=[
+    "消費金 $5",
+    "消費金 $10",
+    "消費金 $20",
+    "消費金 $50",
+    "消費金 $
