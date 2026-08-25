@@ -4,28 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#650000">
-
-<title>阿六仔重慶小麵｜會員中心</title>
+<title>辣巷子重慶小麵｜會員中心</title>
 
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html,body{
   margin:0;
   padding:0;
   background:#f5f5f5;
   color:#222;
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC",
-  "Microsoft JhengHei",Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "PingFang TC","Microsoft JhengHei",Arial,sans-serif;
 }
 
-body{
-  padding-bottom:90px;
-}
+body{padding-bottom:90px}
 
 button{
   border:0;
@@ -36,72 +31,72 @@ button{
 .loading{
   position:fixed;
   inset:0;
-  background:white;
+  background:#fff;
   z-index:9999;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
   flex-direction:column;
-}
-
-.loading-title{
-  font-size:25px;
-  font-weight:700;
-  margin-bottom:10px;
-}
-
-.loading-sub{
-  color:#888;
-  font-size:15px;
+  text-align:center;
 }
 
 .spinner{
-  width:38px;
-  height:38px;
+  width:40px;
+  height:40px;
   border:4px solid #eee;
   border-top-color:#b40000;
   border-radius:50%;
   animation:spin .8s linear infinite;
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 
 @keyframes spin{
   to{transform:rotate(360deg)}
 }
 
+.loading-title{
+  font-size:24px;
+  font-weight:700;
+}
+
+.loading-sub{
+  margin-top:10px;
+  color:#888;
+}
+
 header{
   background:linear-gradient(135deg,#260708,#8d0000,#c30000);
-  color:white;
-  padding:35px 22px 40px;
-  border-radius:0 0 35px 35px;
+  color:#fff;
+  padding:32px 20px 38px;
+  border-radius:0 0 32px 32px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:12px;
 }
 
 .logo{
-  width:70px;
-  height:70px;
-  border:2px solid rgba(255,255,255,.65);
+  width:68px;
+  height:68px;
+  border:2px solid rgba(255,255,255,.7);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:27px;
+  font-size:19px;
   font-weight:900;
+  flex-shrink:0;
 }
 
 .brand h1{
   margin:0;
-  font-size:25px;
+  font-size:23px;
 }
 
 .brand p{
-  margin:7px 0 0;
+  margin:6px 0 0;
   opacity:.8;
 }
 
@@ -109,29 +104,29 @@ header{
   margin-left:auto;
   background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.4);
-  color:white;
-  padding:11px 16px;
-  border-radius:22px;
-  font-size:15px;
+  color:#fff;
+  padding:10px 13px;
+  border-radius:20px;
+  white-space:nowrap;
 }
 
 .balance{
-  margin-top:28px;
-  padding:25px;
-  border-radius:25px;
-  background:rgba(255,255,255,.11);
+  margin-top:25px;
+  padding:23px;
+  border-radius:23px;
+  background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.25);
 }
 
 .balance-title{
-  font-size:17px;
+  font-size:16px;
   opacity:.9;
 }
 
 .balance-money{
-  font-size:46px;
+  font-size:44px;
   font-weight:800;
-  margin:4px 0;
+  margin:3px 0;
 }
 
 .balance-note{
@@ -139,40 +134,48 @@ header{
 }
 
 .container{
-  padding:28px 22px;
+  padding:25px 20px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
+  gap:16px;
 }
 
 .card{
-  background:white;
-  border-radius:25px;
-  padding:23px;
-  box-shadow:0 4px 18px rgba(0,0,0,.06);
+  background:#fff;
+  border-radius:23px;
+  padding:20px;
+  box-shadow:0 4px 16px rgba(0,0,0,.06);
 }
 
 .icon{
-  font-size:35px;
+  font-size:32px;
 }
 
 .card h2{
-  margin:10px 0 7px;
-  font-size:21px;
+  margin:9px 0 6px;
+  font-size:20px;
 }
 
 .card p{
   color:#777;
-  margin:0 0 17px;
+  margin:0 0 15px;
   min-height:22px;
+}
+
+.card button{
+  width:100%;
+  padding:13px 8px;
+  border-radius:15px;
+  font-size:16px;
+  font-weight:700;
 }
 
 .red{
   background:#c71919;
-  color:white;
+  color:#fff;
 }
 
 .yellow{
@@ -182,15 +185,7 @@ header{
 
 .black{
   background:#171717;
-  color:white;
-}
-
-.card button{
-  width:100%;
-  padding:14px 8px;
-  border-radius:16px;
-  font-size:17px;
-  font-weight:700;
+  color:#fff;
 }
 
 .progress{
@@ -198,27 +193,27 @@ header{
   background:#eee;
   border-radius:20px;
   overflow:hidden;
-  margin:14px 0 17px;
+  margin:13px 0 15px;
 }
 
 .progress-bar{
-  height:100%;
   width:0;
+  height:100%;
   background:#ffb400;
   transition:.3s;
 }
 
 .section-title{
-  font-size:25px;
+  font-size:24px;
   font-weight:800;
-  margin:35px 0 15px;
+  margin:32px 0 14px;
 }
 
 .transaction{
-  background:white;
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:12px;
+  background:#fff;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:10px;
   display:flex;
   justify-content:space-between;
 }
@@ -232,8 +227,8 @@ header{
   bottom:0;
   left:0;
   right:0;
-  height:78px;
-  background:white;
+  height:76px;
+  background:#fff;
   border-top:1px solid #eee;
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -241,14 +236,14 @@ header{
 }
 
 .bottom button{
-  background:white;
+  background:#fff;
   color:#777;
   font-size:13px;
 }
 
-.bottom .nav-icon{
+.nav-icon{
   display:block;
-  font-size:25px;
+  font-size:24px;
   margin-bottom:3px;
 }
 
@@ -264,11 +259,11 @@ header{
 }
 
 .modal-box{
-  background:white;
+  background:#fff;
   width:100%;
   max-width:430px;
-  border-radius:28px;
-  padding:27px;
+  border-radius:27px;
+  padding:25px;
   max-height:85vh;
   overflow:auto;
 }
@@ -280,54 +275,56 @@ header{
 .modal-close{
   width:100%;
   margin-top:20px;
-  padding:15px;
+  padding:14px;
   border-radius:15px;
   background:#171717;
-  color:white;
+  color:#fff;
   font-size:17px;
 }
 
 .member-info{
   background:#f7f7f7;
-  padding:17px;
-  border-radius:18px;
-  margin:12px 0;
+  padding:16px;
+  border-radius:17px;
+  margin:11px 0;
 }
 
 .coupon{
-  padding:18px;
+  padding:17px;
   border:2px dashed #d00000;
-  border-radius:18px;
-  margin:12px 0;
+  border-radius:17px;
+  margin:11px 0;
 }
 
 .coupon strong{
   display:block;
-  font-size:20px;
+  font-size:19px;
   margin-bottom:5px;
 }
 
-.error{
-  color:#c00000;
-  margin-top:15px;
-  font-size:14px;
-}
-
 @media(max-width:380px){
+
   .grid{
-    gap:12px;
+    gap:11px;
   }
 
   .card{
-    padding:17px;
+    padding:16px;
   }
 
   .brand h1{
-    font-size:21px;
+    font-size:20px;
   }
 
   .admin-btn{
-    padding:9px 10px;
+    padding:8px 9px;
+    font-size:13px;
+  }
+
+  .logo{
+    width:62px;
+    height:62px;
+    font-size:17px;
   }
 }
 </style>
@@ -336,23 +333,42 @@ header{
 <body>
 
 <div id="loading" class="loading">
+
   <div class="spinner"></div>
-  <div class="loading-title">LINE會員系統載入中…</div>
-  <div class="loading-sub" id="loadingText">正在連線會員服務</div>
+
+  <div class="loading-title">
+    LINE會員系統載入中…
+  </div>
+
+  <div class="loading-sub" id="loadingText">
+    正在連線會員服務
+  </div>
+
 </div>
 
 <header>
 
   <div class="brand">
 
-    <div class="logo">阿六</div>
-
-    <div>
-      <h1>阿六仔重慶小麵</h1>
-      <p>會員中心・消費回饋</p>
+    <div class="logo">
+      辣巷子
     </div>
 
-    <button class="admin-btn" onclick="openAdmin()">
+    <div>
+
+      <h1>
+        辣巷子重慶小麵
+      </h1>
+
+      <p>
+        會員中心・消費回饋
+      </p>
+
+    </div>
+
+    <button
+      class="admin-btn"
+      onclick="openAdmin()">
       老闆後台
     </button>
 
@@ -361,10 +377,12 @@ header{
   <div class="balance">
 
     <div class="balance-title">
-      我的阿六仔消費金
+      我的辣巷子消費金
     </div>
 
-    <div class="balance-money" id="balance">
+    <div
+      class="balance-money"
+      id="balance">
       $0
     </div>
 
@@ -380,7 +398,6 @@ header{
 
   <div class="grid">
 
-    <!-- 抽獎 -->
     <div class="card">
 
       <div class="icon">🎰</div>
@@ -391,13 +408,14 @@ header{
         尚無抽獎次數
       </p>
 
-      <button class="red" onclick="draw()">
+      <button
+        class="red"
+        onclick="draw()">
         開始抽獎
       </button>
 
     </div>
 
-    <!-- 集點 -->
     <div class="card">
 
       <div class="icon">⭐</div>
@@ -409,16 +427,20 @@ header{
       </p>
 
       <div class="progress">
-        <div id="pointBar" class="progress-bar"></div>
+        <div
+          id="pointBar"
+          class="progress-bar">
+        </div>
       </div>
 
-      <button class="yellow" onclick="pointsRule()">
+      <button
+        class="yellow"
+        onclick="pointsRule()">
         兌換規則
       </button>
 
     </div>
 
-    <!-- 優惠 -->
     <div class="card">
 
       <div class="icon">🎁</div>
@@ -426,16 +448,17 @@ header{
       <h2>優惠券</h2>
 
       <p>
-        新會員、生曰、活動券
+        新會員、生日、活動券
       </p>
 
-      <button class="black" onclick="coupon()">
+      <button
+        class="black"
+        onclick="coupon()">
         查看優惠
       </button>
 
     </div>
 
-    <!-- 會員 -->
     <div class="card">
 
       <div class="icon">👤</div>
@@ -446,7 +469,9 @@ header{
         LINE會員
       </p>
 
-      <button class="black" onclick="member()">
+      <button
+        class="black"
+        onclick="member()">
         會員資料
       </button>
 
@@ -461,12 +486,25 @@ header{
   <div id="transactions">
 
     <div class="transaction">
+
       <div>
-        <strong>目前尚無交易紀錄</strong>
+
+        <strong>
+          目前尚無交易紀錄
+        </strong>
+
         <br>
-        <small>消費後會顯示在這裡</small>
+
+        <small>
+          消費後會顯示在這裡
+        </small>
+
       </div>
-      <div>—</div>
+
+      <div>
+        —
+      </div>
+
     </div>
 
   </div>
@@ -497,19 +535,19 @@ header{
 
 </div>
 
-<!-- Modal -->
-
 <div class="modal" id="modal">
 
   <div class="modal-box">
 
     <h2 id="modalTitle">
-      阿六仔會員
+      辣巷子會員
     </h2>
 
     <div id="modalContent"></div>
 
-    <button class="modal-close" onclick="closeModal()">
+    <button
+      class="modal-close"
+      onclick="closeModal()">
       關閉
     </button>
 
@@ -519,56 +557,79 @@ header{
 
 <script>
 
-const LIFF_ID = "2011140242-vT7fnGJs";
+const LIFF_ID =
+  "2011140242-vT7fnGJs";
 
 let memberData = {
+
   name:"會員",
+
   userId:"",
+
   balance:0,
+
   points:0,
+
   draws:0
+
 };
 
 
-/* =========================
-   LIFF 初始化
-========================= */
+/* LINE 初始化 */
 
 async function initLIFF(){
 
   try{
 
-    document.getElementById("loadingText").innerText =
+    document.getElementById(
+      "loadingText"
+    ).innerText =
       "正在連線 LINE 會員服務…";
 
     await liff.init({
+
       liffId:LIFF_ID
+
     });
 
     if(!liff.isLoggedIn()){
 
-      document.getElementById("loadingText").innerText =
+      document.getElementById(
+        "loadingText"
+      ).innerText =
         "正在開啟 LINE 登入…";
 
       liff.login({
-        redirectUri:window.location.href
+
+        redirectUri:
+          window.location.href
+
       });
 
       return;
+
     }
 
     await loadMember();
 
-    document.getElementById("loading").style.display="none";
+    document.getElementById(
+      "loading"
+    ).style.display =
+      "none";
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById("loadingText").innerHTML =
+    document.getElementById(
+      "loadingText"
+    ).innerHTML =
       "LINE 會員服務連線失敗<br><br>" +
       "<small>" +
-      escapeHtml(error.message || "請重新整理頁面") +
+      escapeHtml(
+        error.message ||
+        "請重新整理頁面"
+      ) +
       "</small>";
 
   }
@@ -576,112 +637,129 @@ async function initLIFF(){
 }
 
 
-/* =========================
-   取得 LINE 會員
-========================= */
+/* 取得會員 */
 
 async function loadMember(){
 
-  try{
+  const profile =
+    await liff.getProfile();
 
-    const profile = await liff.getProfile();
+  memberData.name =
+    profile.displayName ||
+    "LINE會員";
 
-    memberData.name =
-      profile.displayName || "LINE會員";
+  memberData.userId =
+    profile.userId || "";
 
-    memberData.userId =
-      profile.userId || "";
+  const saved =
+    localStorage.getItem(
+      "laxiangzi_member_" +
+      memberData.userId
+    );
 
-    const saved =
-      localStorage.getItem(
-        "aliuzi_member_" + memberData.userId
-      );
+  if(saved){
 
-    if(saved){
+    memberData = {
 
-      memberData = {
-        ...memberData,
-        ...JSON.parse(saved)
-      };
+      ...memberData,
 
-    }
+      ...JSON.parse(saved)
 
-    updateUI();
-
-  }catch(error){
-
-    console.error(error);
-
-    throw error;
+    };
 
   }
+
+  updateUI();
 
 }
 
 
-/* =========================
-   儲存資料
-========================= */
+/* 儲存 */
 
 function saveMember(){
 
   if(!memberData.userId){
+
     return;
+
   }
 
   localStorage.setItem(
-    "aliuzi_member_" + memberData.userId,
+
+    "laxiangzi_member_" +
+    memberData.userId,
+
     JSON.stringify(memberData)
+
   );
 
 }
 
 
-/* =========================
-   更新畫面
-========================= */
+/* 更新 */
 
 function updateUI(){
 
-  document.getElementById("balance").innerText =
-    "$" + Number(memberData.balance || 0);
-
-  document.getElementById("points").innerText =
-    Number(memberData.points || 0);
-
-  const percentage =
-    Math.min(
-      100,
-      Number(memberData.points || 0) * 10
+  document.getElementById(
+    "balance"
+  ).innerText =
+    "$" +
+    Number(
+      memberData.balance || 0
     );
 
-  document.getElementById("pointBar").style.width =
-    percentage + "%";
+  document.getElementById(
+    "points"
+  ).innerText =
+    Number(
+      memberData.points || 0
+    );
 
-  document.getElementById("drawText").innerText =
+  document.getElementById(
+    "pointBar"
+  ).style.width =
+    Math.min(
+      100,
+      Number(
+        memberData.points || 0
+      ) * 10
+    ) + "%";
+
+  document.getElementById(
+    "drawText"
+  ).innerText =
+
     memberData.draws > 0
-      ? "剩餘 " + memberData.draws + " 次抽獎"
+
+      ? "剩餘 " +
+        memberData.draws +
+        " 次抽獎"
+
       : "尚無抽獎次數";
 
-  document.getElementById("memberStatus").innerText =
-    memberData.name + "（LINE會員）";
+  document.getElementById(
+    "memberStatus"
+  ).innerText =
+    memberData.name +
+    "（LINE會員）";
 
   saveMember();
 
 }
 
 
-/* =========================
-   抽獎
-========================= */
+/* 抽獎 */
 
 function draw(){
 
   if(memberData.draws <= 0){
 
     show(
+
       "目前沒有抽獎次數",
+
       "消費後即可獲得抽獎機會！"
+
     );
 
     return;
@@ -693,11 +771,17 @@ function draw(){
   const prizes = [
 
     "消費金 $5",
+
     "消費金 $10",
+
     "消費金 $20",
+
     "消費金 $50",
+
     "消費金 $100",
+
     "集點 1 點",
+
     "再接再厲"
 
   ];
@@ -705,22 +789,31 @@ function draw(){
   const prize =
     prizes[
       Math.floor(
-        Math.random() * prizes.length
+        Math.random() *
+        prizes.length
       )
     ];
 
-  if(prize.startsWith("消費金")){
+  if(
+    prize.startsWith("消費金")
+  ){
 
     const money =
       parseInt(
-        prize.replace(/\D/g,"")
+        prize.replace(
+          /\D/g,
+          ""
+        )
       );
 
-    memberData.balance += money;
+    memberData.balance +=
+      money;
 
   }
 
-  if(prize === "集點 1 點"){
+  if(
+    prize === "集點 1 點"
+  ){
 
     memberData.points =
       Math.min(
@@ -740,141 +833,164 @@ function draw(){
 }
 
 
-/* =========================
-   集點規則
-========================= */
+/* 集點 */
 
 function pointsRule(){
 
   show(
+
     "⭐ 集點兌換規則",
-    `
-      <div class="member-info">
-        消費滿指定金額即可累積集點。
-      </div>
 
-      <div class="member-info">
-        集滿 <strong>10 點</strong>
-        可兌換指定優惠。
-      </div>
-
-      <div class="member-info">
-        實際兌換內容可由老闆後台設定。
-      </div>
     `
+    <div class="member-info">
+      消費滿指定金額即可累積集點。
+    </div>
+
+    <div class="member-info">
+      集滿 <strong>10 點</strong>
+      可兌換指定優惠。
+    </div>
+
+    <div class="member-info">
+      實際兌換內容可由老闆後台設定。
+    </div>
+    `
+
   );
 
 }
 
 
-/* =========================
-   優惠券
-========================= */
+/* 優惠券 */
 
 function coupon(){
 
   show(
+
     "🎁 我的優惠券",
-    `
-      <div class="coupon">
-        <strong>新會員優惠</strong>
-        新會員可享指定優惠
-      </div>
 
-      <div class="coupon">
-        <strong>生日優惠</strong>
-        生日月份可使用
-      </div>
-
-      <div class="coupon">
-        <strong>活動優惠券</strong>
-        店內活動期間發放
-      </div>
     `
+    <div class="coupon">
+      <strong>新會員優惠</strong>
+      新會員可享指定優惠
+    </div>
+
+    <div class="coupon">
+      <strong>生日優惠</strong>
+      生日月份可使用
+    </div>
+
+    <div class="coupon">
+      <strong>活動優惠券</strong>
+      店內活動期間發放
+    </div>
+    `
+
   );
 
 }
 
 
-/* =========================
-   會員資料
-========================= */
+/* 會員資料 */
 
 function member(){
 
   show(
-    "👤 會員資料",
+
+    "👤 辣巷子會員",
+
     `
-      <div class="member-info">
-        <strong>會員名稱</strong><br>
-        ${escapeHtml(memberData.name)}
-      </div>
+    <div class="member-info">
+      <strong>會員名稱</strong><br>
+      ${escapeHtml(
+        memberData.name
+      )}
+    </div>
 
-      <div class="member-info">
-        <strong>LINE User ID</strong><br>
-        <small>${escapeHtml(memberData.userId)}</small>
-      </div>
+    <div class="member-info">
+      <strong>LINE User ID</strong><br>
+      <small>
+        ${escapeHtml(
+          memberData.userId
+        )}
+      </small>
+    </div>
 
-      <div class="member-info">
-        <strong>消費金</strong><br>
-        $${Number(memberData.balance || 0)}
-      </div>
+    <div class="member-info">
+      <strong>辣巷子消費金</strong><br>
+      $${Number(
+        memberData.balance || 0
+      )}
+    </div>
 
-      <div class="member-info">
-        <strong>集點</strong><br>
-        ${Number(memberData.points || 0)} 點
-      </div>
+    <div class="member-info">
+      <strong>集點</strong><br>
+      ${Number(
+        memberData.points || 0
+      )} 點
+    </div>
     `
+
   );
 
 }
 
 
-/* =========================
-   老闆後台
-========================= */
+/* 老闆後台 */
 
 function openAdmin(){
 
   show(
-    "🔐 老闆後台",
-    `
-      <div class="member-info">
-        老闆後台目前尚未開放。
-      </div>
 
-      <div class="member-info">
-        下一步會接上真正的管理員登入，
-        並連接會員資料庫。
-      </div>
+    "🔐 辣巷子老闆後台",
+
     `
+    <div class="member-info">
+      老闆後台目前尚未開放。
+    </div>
+
+    <div class="member-info">
+      下一步會接上真正的管理員登入，
+      並連接會員資料庫。
+    </div>
+    `
+
   );
 
 }
 
 
-/* =========================
-   Modal
-========================= */
+/* Modal */
 
-function show(title,content){
+function show(
+  title,
+  content
+){
 
-  document.getElementById("modalTitle")
-    .innerText = title;
+  document.getElementById(
+    "modalTitle"
+  ).innerText =
+    title;
 
-  document.getElementById("modalContent")
-    .innerHTML = content;
+  document.getElementById(
+    "modalContent"
+  ).innerHTML =
+    content;
 
-  document.getElementById("modal")
-    .style.display = "flex";
+  document.getElementById(
+    "modal"
+  ).style.display =
+    "flex";
 
 }
 
 
 function closeModal(){
 
-  document.getElementById("modal")
-    .style.display = "none";
+  document.getElementById(
+    "modal"
+  ).style.display =
+    "none";
 
 }
 
@@ -882,38 +998,67 @@ function closeModal(){
 function scrollTopPage(){
 
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
 
 }
 
 
-function escapeHtml(value){
+function escapeHtml(
+  value
+){
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/* 點背景關閉 */
+document
+  .getElementById("modal")
+  .addEventListener(
+    "click",
+    function(e){
 
-document.getElementById("modal")
-  .addEventListener("click",function(e){
+      if(
+        e.target === this
+      ){
 
-    if(e.target === this){
-      closeModal();
+        closeModal();
+
+      }
+
     }
+  );
 
-  });
-
-
-/* 開始 */
 
 window.addEventListener(
   "load",
