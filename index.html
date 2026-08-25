@@ -2,296 +2,925 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#650000">
+
 <title>阿六仔重慶小麵｜會員中心</title>
 
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
 <style>
-*{box-sizing:border-box}
-body{
+*{
+  box-sizing:border-box;
+}
+
+html,body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;
+  padding:0;
   background:#f5f5f5;
   color:#222;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC",
+  "Microsoft JhengHei",Arial,sans-serif;
 }
-.header{
-  background:linear-gradient(135deg,#260708,#7d090d);
+
+body{
+  padding-bottom:90px;
+}
+
+button{
+  border:0;
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.loading{
+  position:fixed;
+  inset:0;
+  background:white;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  flex-direction:column;
+}
+
+.loading-title{
+  font-size:25px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.loading-sub{
+  color:#888;
+  font-size:15px;
+}
+
+.spinner{
+  width:38px;
+  height:38px;
+  border:4px solid #eee;
+  border-top-color:#b40000;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin-bottom:22px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+header{
+  background:linear-gradient(135deg,#260708,#8d0000,#c30000);
   color:white;
-  padding:28px 22px 35px;
-  border-radius:0 0 34px 34px;
+  padding:35px 22px 40px;
+  border-radius:0 0 35px 35px;
 }
+
 .brand{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:15px;
 }
+
 .logo{
-  width:58px;
-  height:58px;
-  border:1px solid rgba(255,255,255,.6);
+  width:70px;
+  height:70px;
+  border:2px solid rgba(255,255,255,.65);
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:bold;
-  font-size:20px;
+  font-size:27px;
+  font-weight:900;
 }
+
 .brand h1{
   margin:0;
-  font-size:23px;
+  font-size:25px;
 }
+
 .brand p{
-  margin:5px 0 0;
+  margin:7px 0 0;
   opacity:.8;
-  font-size:14px;
 }
+
+.admin-btn{
+  margin-left:auto;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.4);
+  color:white;
+  padding:11px 16px;
+  border-radius:22px;
+  font-size:15px;
+}
+
 .balance{
-  margin-top:25px;
-  padding:22px;
-  border-radius:24px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
+  margin-top:28px;
+  padding:25px;
+  border-radius:25px;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.25);
 }
-.balance small{
-  font-size:14px;
+
+.balance-title{
+  font-size:17px;
+  opacity:.9;
 }
-.money{
-  font-size:42px;
+
+.balance-money{
+  font-size:46px;
   font-weight:800;
   margin:4px 0;
 }
-.balance span{
-  font-size:13px;
-  opacity:.8;
+
+.balance-note{
+  opacity:.75;
 }
+
 .container{
-  padding:22px 18px 100px;
+  padding:28px 22px;
 }
+
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:16px;
+  gap:20px;
 }
+
 .card{
   background:white;
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 4px 16px rgba(0,0,0,.05);
+  border-radius:25px;
+  padding:23px;
+  box-shadow:0 4px 18px rgba(0,0,0,.06);
 }
+
 .icon{
-  font-size:28px;
+  font-size:35px;
 }
+
 .card h2{
-  margin:8px 0 5px;
-  font-size:19px;
+  margin:10px 0 7px;
+  font-size:21px;
 }
+
 .card p{
   color:#777;
-  font-size:14px;
-  margin:0 0 18px;
+  margin:0 0 17px;
+  min-height:22px;
 }
-button{
+
+.red{
+  background:#c71919;
+  color:white;
+}
+
+.yellow{
+  background:#ffb400;
+  color:#111;
+}
+
+.black{
+  background:#171717;
+  color:white;
+}
+
+.card button{
   width:100%;
-  border:0;
-  border-radius:14px;
-  padding:14px 10px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
+  padding:14px 8px;
+  border-radius:16px;
+  font-size:17px;
+  font-weight:700;
 }
-.red{background:#c91820;color:white}
-.yellow{background:#ffb900;color:#111}
-.black{background:#171717;color:white}
-.section{
-  margin-top:24px;
+
+.progress{
+  height:10px;
+  background:#eee;
+  border-radius:20px;
+  overflow:hidden;
+  margin:14px 0 17px;
 }
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:#ffb400;
+  transition:.3s;
+}
+
 .section-title{
-  font-size:22px;
+  font-size:25px;
   font-weight:800;
-  margin-bottom:12px;
+  margin:35px 0 15px;
 }
-.record{
+
+.transaction{
   background:white;
-  padding:17px;
-  border-radius:18px;
-  margin-bottom:10px;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:12px;
   display:flex;
   justify-content:space-between;
 }
+
+.transaction small{
+  color:#888;
+}
+
 .bottom{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
-  height:76px;
+  height:78px;
   background:white;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  box-shadow:0 -3px 15px rgba(0,0,0,.08);
+  border-top:1px solid #eee;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:1000;
 }
-.bottom div{
-  text-align:center;
-  font-size:12px;
+
+.bottom button{
+  background:white;
   color:#777;
+  font-size:13px;
 }
-.bottom b{
+
+.bottom .nav-icon{
   display:block;
   font-size:25px;
+  margin-bottom:3px;
 }
+
 .modal{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.55);
-  z-index:10;
+  z-index:3000;
   align-items:center;
   justify-content:center;
-  padding:25px;
+  padding:20px;
 }
+
 .modal-box{
   background:white;
   width:100%;
-  max-width:420px;
-  border-radius:25px;
-  padding:25px;
-  text-align:center;
+  max-width:430px;
+  border-radius:28px;
+  padding:27px;
+  max-height:85vh;
+  overflow:auto;
 }
+
 .modal-box h2{
   margin-top:0;
 }
-.prize{
-  font-size:42px;
-  font-weight:900;
-  color:#c91820;
-  margin:20px 0;
+
+.modal-close{
+  width:100%;
+  margin-top:20px;
+  padding:15px;
+  border-radius:15px;
+  background:#171717;
+  color:white;
+  font-size:17px;
 }
-.close{
-  background:#eee;
-  color:#333;
-  margin-top:10px;
+
+.member-info{
+  background:#f7f7f7;
+  padding:17px;
+  border-radius:18px;
+  margin:12px 0;
+}
+
+.coupon{
+  padding:18px;
+  border:2px dashed #d00000;
+  border-radius:18px;
+  margin:12px 0;
+}
+
+.coupon strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.error{
+  color:#c00000;
+  margin-top:15px;
+  font-size:14px;
+}
+
+@media(max-width:380px){
+  .grid{
+    gap:12px;
+  }
+
+  .card{
+    padding:17px;
+  }
+
+  .brand h1{
+    font-size:21px;
+  }
+
+  .admin-btn{
+    padding:9px 10px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
+<div id="loading" class="loading">
+  <div class="spinner"></div>
+  <div class="loading-title">LINE會員系統載入中…</div>
+  <div class="loading-sub" id="loadingText">正在連線會員服務</div>
+</div>
+
+<header>
+
   <div class="brand">
+
     <div class="logo">阿六</div>
+
     <div>
       <h1>阿六仔重慶小麵</h1>
       <p>會員中心・消費回饋</p>
     </div>
+
+    <button class="admin-btn" onclick="openAdmin()">
+      老闆後台
+    </button>
+
   </div>
 
   <div class="balance">
-    <small>我的阿六仔消費金</small>
-    <div class="money" id="balance">$0</div>
-    <span>僅限本店消費，不可提領</span>
-  </div>
-</div>
 
-<div class="container">
+    <div class="balance-title">
+      我的阿六仔消費金
+    </div>
+
+    <div class="balance-money" id="balance">
+      $0
+    </div>
+
+    <div class="balance-note">
+      僅限本店消費，不可提領
+    </div>
+
+  </div>
+
+</header>
+
+<main class="container">
 
   <div class="grid">
 
+    <!-- 抽獎 -->
     <div class="card">
+
       <div class="icon">🎰</div>
+
       <h2>消費抽獎</h2>
-      <p id="drawText">尚無抽獎次數</p>
-      <button class="red" onclick="draw()">開始抽獎</button>
+
+      <p id="drawText">
+        尚無抽獎次數
+      </p>
+
+      <button class="red" onclick="draw()">
+        開始抽獎
+      </button>
+
     </div>
 
+    <!-- 集點 -->
     <div class="card">
+
       <div class="icon">⭐</div>
+
       <h2>集點</h2>
-      <p><b id="points">0</b> / 10 點</p>
-      <button class="yellow" onclick="redeem()">兌換規則</button>
-    </div>
 
-    <div class="card">
-      <div class="icon">🎁</div>
-      <h2>優惠券</h2>
-      <p>新會員、生日、活動券</p>
-      <button class="black" onclick="coupon()">查看優惠</button>
-    </div>
+      <p>
+        <span id="points">0</span> / 10 點
+      </p>
 
-    <div class="card">
-      <div class="icon">👤</div>
-      <h2>會員</h2>
-      <p>LINE會員（登入中）</p>
-      <button class="black" onclick="member()">會員資料</button>
-    </div>
-
-  </div>
-
-  <div class="section">
-    <div class="section-title">📒 交易紀錄</div>
-
-    <div id="records">
-      <div class="record">
-        <span>目前尚無交易</span>
-        <span>$0</span>
+      <div class="progress">
+        <div id="pointBar" class="progress-bar"></div>
       </div>
+
+      <button class="yellow" onclick="pointsRule()">
+        兌換規則
+      </button>
+
     </div>
+
+    <!-- 優惠 -->
+    <div class="card">
+
+      <div class="icon">🎁</div>
+
+      <h2>優惠券</h2>
+
+      <p>
+        新會員、生曰、活動券
+      </p>
+
+      <button class="black" onclick="coupon()">
+        查看優惠
+      </button>
+
+    </div>
+
+    <!-- 會員 -->
+    <div class="card">
+
+      <div class="icon">👤</div>
+
+      <h2>會員</h2>
+
+      <p id="memberStatus">
+        LINE會員
+      </p>
+
+      <button class="black" onclick="member()">
+        會員資料
+      </button>
+
+    </div>
+
   </div>
 
-</div>
+  <div class="section-title">
+    📒 交易紀錄
+  </div>
+
+  <div id="transactions">
+
+    <div class="transaction">
+      <div>
+        <strong>目前尚無交易紀錄</strong>
+        <br>
+        <small>消費後會顯示在這裡</small>
+      </div>
+      <div>—</div>
+    </div>
+
+  </div>
+
+</main>
 
 <div class="bottom">
-  <div onclick="member()"><b>⌂</b>會員</div>
-  <div onclick="draw()"><b>🎰</b>抽獎</div>
-  <div onclick="coupon()"><b>🎁</b>優惠</div>
-  <div onclick="member()"><b>👤</b>我的</div>
+
+  <button onclick="scrollTopPage()">
+    <span class="nav-icon">⌂</span>
+    會員
+  </button>
+
+  <button onclick="draw()">
+    <span class="nav-icon">🎰</span>
+    抽獎
+  </button>
+
+  <button onclick="coupon()">
+    <span class="nav-icon">🎁</span>
+    優惠
+  </button>
+
+  <button onclick="member()">
+    <span class="nav-icon">👤</span>
+    我的
+  </button>
+
 </div>
 
+<!-- Modal -->
+
 <div class="modal" id="modal">
+
   <div class="modal-box">
-    <h2 id="modalTitle">恭喜！</h2>
-    <div class="prize" id="modalContent"></div>
-    <button class="red" onclick="closeModal()">確定</button>
+
+    <h2 id="modalTitle">
+      阿六仔會員
+    </h2>
+
+    <div id="modalContent"></div>
+
+    <button class="modal-close" onclick="closeModal()">
+      關閉
+    </button>
+
   </div>
+
 </div>
 
 <script>
 
-let balance=Number(localStorage.getItem("balance")||0);
-let points=Number(localStorage.getItem("points")||0);
-let draws=Number(localStorage.getItem("draws")||0);
+const LIFF_ID = "2011140242-vT7fnGJs";
 
-function update(){
-  document.getElementById("balance").innerText="$"+balance;
-  document.getElementById("points").innerText=points;
-  document.getElementById("drawText").innerText=
-    draws>0 ? "剩餘 "+draws+" 次抽獎" : "尚無抽獎次數";
+let memberData = {
+  name:"會員",
+  userId:"",
+  balance:0,
+  points:0,
+  draws:0
+};
 
-  localStorage.setItem("balance",balance);
-  localStorage.setItem("points",points);
-  localStorage.setItem("draws",draws);
+
+/* =========================
+   LIFF 初始化
+========================= */
+
+async function initLIFF(){
+
+  try{
+
+    document.getElementById("loadingText").innerText =
+      "正在連線 LINE 會員服務…";
+
+    await liff.init({
+      liffId:LIFF_ID
+    });
+
+    if(!liff.isLoggedIn()){
+
+      document.getElementById("loadingText").innerText =
+        "正在開啟 LINE 登入…";
+
+      liff.login({
+        redirectUri:window.location.href
+      });
+
+      return;
+    }
+
+    await loadMember();
+
+    document.getElementById("loading").style.display="none";
+
+  }catch(error){
+
+    console.error(error);
+
+    document.getElementById("loadingText").innerHTML =
+      "LINE 會員服務連線失敗<br><br>" +
+      "<small>" +
+      escapeHtml(error.message || "請重新整理頁面") +
+      "</small>";
+
+  }
+
 }
 
-function show(title,content){
-  document.getElementById("modalTitle").innerText=title;
-  document.getElementById("modalContent").innerText=content;
-  document.getElementById("modal").style.display="flex";
+
+/* =========================
+   取得 LINE 會員
+========================= */
+
+async function loadMember(){
+
+  try{
+
+    const profile = await liff.getProfile();
+
+    memberData.name =
+      profile.displayName || "LINE會員";
+
+    memberData.userId =
+      profile.userId || "";
+
+    const saved =
+      localStorage.getItem(
+        "aliuzi_member_" + memberData.userId
+      );
+
+    if(saved){
+
+      memberData = {
+        ...memberData,
+        ...JSON.parse(saved)
+      };
+
+    }
+
+    updateUI();
+
+  }catch(error){
+
+    console.error(error);
+
+    throw error;
+
+  }
+
 }
 
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
 
-function draw(){
+/* =========================
+   儲存資料
+========================= */
 
-  if(draws<=0){
-    show("目前沒有抽獎次數","消費後即可獲得抽獎機會！");
+function saveMember(){
+
+  if(!memberData.userId){
     return;
   }
 
-  draws--;
+  localStorage.setItem(
+    "aliuzi_member_" + memberData.userId,
+    JSON.stringify(memberData)
+  );
 
-  const prizes=[
+}
+
+
+/* =========================
+   更新畫面
+========================= */
+
+function updateUI(){
+
+  document.getElementById("balance").innerText =
+    "$" + Number(memberData.balance || 0);
+
+  document.getElementById("points").innerText =
+    Number(memberData.points || 0);
+
+  const percentage =
+    Math.min(
+      100,
+      Number(memberData.points || 0) * 10
+    );
+
+  document.getElementById("pointBar").style.width =
+    percentage + "%";
+
+  document.getElementById("drawText").innerText =
+    memberData.draws > 0
+      ? "剩餘 " + memberData.draws + " 次抽獎"
+      : "尚無抽獎次數";
+
+  document.getElementById("memberStatus").innerText =
+    memberData.name + "（LINE會員）";
+
+  saveMember();
+
+}
+
+
+/* =========================
+   抽獎
+========================= */
+
+function draw(){
+
+  if(memberData.draws <= 0){
+
+    show(
+      "目前沒有抽獎次數",
+      "消費後即可獲得抽獎機會！"
+    );
+
+    return;
+
+  }
+
+  memberData.draws--;
+
+  const prizes = [
+
     "消費金 $5",
     "消費金 $10",
     "消費金 $20",
     "消費金 $50",
-    "消費金 $
+    "消費金 $100",
+    "集點 1 點",
+    "再接再厲"
+
+  ];
+
+  const prize =
+    prizes[
+      Math.floor(
+        Math.random() * prizes.length
+      )
+    ];
+
+  if(prize.startsWith("消費金")){
+
+    const money =
+      parseInt(
+        prize.replace(/\D/g,"")
+      );
+
+    memberData.balance += money;
+
+  }
+
+  if(prize === "集點 1 點"){
+
+    memberData.points =
+      Math.min(
+        10,
+        memberData.points + 1
+      );
+
+  }
+
+  updateUI();
+
+  show(
+    "🎉 恭喜中獎！",
+    prize
+  );
+
+}
+
+
+/* =========================
+   集點規則
+========================= */
+
+function pointsRule(){
+
+  show(
+    "⭐ 集點兌換規則",
+    `
+      <div class="member-info">
+        消費滿指定金額即可累積集點。
+      </div>
+
+      <div class="member-info">
+        集滿 <strong>10 點</strong>
+        可兌換指定優惠。
+      </div>
+
+      <div class="member-info">
+        實際兌換內容可由老闆後台設定。
+      </div>
+    `
+  );
+
+}
+
+
+/* =========================
+   優惠券
+========================= */
+
+function coupon(){
+
+  show(
+    "🎁 我的優惠券",
+    `
+      <div class="coupon">
+        <strong>新會員優惠</strong>
+        新會員可享指定優惠
+      </div>
+
+      <div class="coupon">
+        <strong>生日優惠</strong>
+        生日月份可使用
+      </div>
+
+      <div class="coupon">
+        <strong>活動優惠券</strong>
+        店內活動期間發放
+      </div>
+    `
+  );
+
+}
+
+
+/* =========================
+   會員資料
+========================= */
+
+function member(){
+
+  show(
+    "👤 會員資料",
+    `
+      <div class="member-info">
+        <strong>會員名稱</strong><br>
+        ${escapeHtml(memberData.name)}
+      </div>
+
+      <div class="member-info">
+        <strong>LINE User ID</strong><br>
+        <small>${escapeHtml(memberData.userId)}</small>
+      </div>
+
+      <div class="member-info">
+        <strong>消費金</strong><br>
+        $${Number(memberData.balance || 0)}
+      </div>
+
+      <div class="member-info">
+        <strong>集點</strong><br>
+        ${Number(memberData.points || 0)} 點
+      </div>
+    `
+  );
+
+}
+
+
+/* =========================
+   老闆後台
+========================= */
+
+function openAdmin(){
+
+  show(
+    "🔐 老闆後台",
+    `
+      <div class="member-info">
+        老闆後台目前尚未開放。
+      </div>
+
+      <div class="member-info">
+        下一步會接上真正的管理員登入，
+        並連接會員資料庫。
+      </div>
+    `
+  );
+
+}
+
+
+/* =========================
+   Modal
+========================= */
+
+function show(title,content){
+
+  document.getElementById("modalTitle")
+    .innerText = title;
+
+  document.getElementById("modalContent")
+    .innerHTML = content;
+
+  document.getElementById("modal")
+    .style.display = "flex";
+
+}
+
+
+function closeModal(){
+
+  document.getElementById("modal")
+    .style.display = "none";
+
+}
+
+
+function scrollTopPage(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* 點背景關閉 */
+
+document.getElementById("modal")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+      closeModal();
+    }
+
+  });
+
+
+/* 開始 */
+
+window.addEventListener(
+  "load",
+  initLIFF
+);
+
+</script>
+
+</body>
+</html>
