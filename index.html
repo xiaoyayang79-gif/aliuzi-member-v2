@@ -640,38 +640,53 @@ async function initLIFF(){
 /* 取得會員 */
 
 async function loadMember(){
+  const accessToken = liff.getAccessToken();
 
-  const profile =
-    await liff.getProfile();
-
-  memberData.name =
-    profile.displayName ||
-    "LINE會員";
-
-  memberData.userId =
-    profile.userId || "";
-
-  const saved =
-    localStorage.getItem(
-      "laxiangzi_member_" +
-      memberData.userId
-    );
-
-  if(saved){
-
-    memberData = {
-
-      ...memberData,
-
-      ...JSON.parse(saved)
-
-    };
-
+  if(!accessToken){
+    throw new Error("LINE 登入憑證取得失敗");
   }
+
+  const response = await fetch(
+    "https://tctjonrbvvfntiqzmdnp.supabase.co/functions/v1/member-api-v3",
+    {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "apikey":"sb_publishable_iTqqKGe0WKiv-lQ2NIkKrg_1GHytUDh"
+      },
+      body:JSON.stringify({
+        accessToken:accessToken
+      })
+    }
+  );
+
+  const result = await response.json();
+
+  if(!response.ok || !result.ok){
+    throw new Error(result.error || "無法取得會員資料");
+  }
+
+  const m = result.member;
+
+  memberData = {
+    ...memberData,
+    id:m.id || "",
+    name:m.name || "LINE會員",
+    userId:m.line_user_id || "",
+    balance:Number(m.balance || 0),
+    points:Number(m.points || 0),
+    draws:Number(m.draws || 0),
+    orders:Number(m.orders || 0),
+    birthday:m.birthday || "",
+    picture_url:m.picture_url || null,
+    transactions:result.transactions || [],
+    coupons:result.coupons || []
+  };
 
   updateUI();
 
-}
+  return;
+
 
 
 /* 儲存 */
