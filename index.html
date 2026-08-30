@@ -599,12 +599,9 @@ async function initLIFF(){
       ).innerText =
         "正在開啟 LINE 登入…";
 
-      liff.login({
-
-        redirectUri:
-          window.location.href
-
-      });
+liff.login({
+    redirectUri: window.location.origin + window.location.pathname
+});
 
       return;
 
