@@ -584,13 +584,13 @@ async function initLIFF(){
     document.getElementById(
       "loadingText"
     ).innerText =
-      "正在連線 LINE 會員服務…";
 
-    await liff.init({
+"正在連線 LINE 會員服務...";
 
-      liffId:LIFF_ID
-
-    });
+await liff.init({
+  liffId: LIFF_ID,
+  withLoginOnExternalBrowser: true
+});
 
     if(!liff.isLoggedIn()){
 
